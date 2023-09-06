@@ -3,7 +3,7 @@
 ## Introduction
 This documentation provides an in-depth explanation of the Weather App, a JavaScript application designed to fetch and display weather information for a specified city. The app utilizes the OpenWeatherMap API and includes features such as live weather data, error handling, and city suggestions.
 
-!()
+!(https://github.com/privateaz/WeatherApp/blob/main/img/preview-image.jpg)
 
 ## Table of Contents
 1. [Prerequisites](#prerequisites)
