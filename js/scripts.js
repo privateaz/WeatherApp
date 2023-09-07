@@ -1,7 +1,11 @@
-require("dotenv").config();
+// require("dotenv").config();
 
 // Variables and element selection:
+<<<<<<< HEAD
 const apiKey = process.env.API_KEY
+=======
+const apiKey = "f382cadccef19526187fd2efd55fdffe";
+>>>>>>> 5fd927c9260733a1e5eec64c5d0d2f96e12632c6
 const apiUnsplash = "https://source.unsplash.com/1600x900/?";
 
 const cityInput = document.querySelector("#city-input");
