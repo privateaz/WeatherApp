@@ -1,23 +1,20 @@
-/* Reset de estilos padrão */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-/* Definir uma paleta de cores fluidas */
 :root {
-  --cor-primaria: #007bff;
-  --cor-secundaria: #0056b3;
-  --cor-fundo: #f0f0f0;
-  --cor-texto: #333;
-  --cor-texto-destaque: #fff;
-  --cor-borda: #ccc;
+  --primary-color: #007bff;
+  --secondary-color: #0056b3;
+  --background-color: #f0f0f0;
+  --text-color: #333;
+  --highlight-text-color: #fff;
+  --border-color: #ccc;
 }
 
-/* Estilos globais para o corpo */
 body {
-  background-color: var(--cor-fundo);
+  background-color: var(--background-color);
   font-family: "Ubuntu", sans-serif;
   display: flex;
   justify-content: center;
@@ -26,7 +23,6 @@ body {
   margin: 0;
 }
 
-/* Estilos para o contêiner principal */
 .container {
   background-color: #fff;
   border-radius: 10px;
@@ -36,19 +32,17 @@ body {
   max-width: 400px;
 }
 
-/* Estilos para o título */
 h3 {
   font-weight: 500;
   margin-bottom: 20px;
-  color: var(--cor-texto);
+  color: var(--text-color);
 }
 
-/* Estilos para o input e botão de pesquisa */
 .form-input-container {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  border: 1px solid var(--cor-borda);
+  border: 1px solid var(--border-color);
   border-radius: 5px;
   overflow: hidden;
 }
@@ -62,8 +56,8 @@ h3 {
 }
 
 #search {
-  background-color: var(--cor-primaria);
-  color: var(--cor-texto-destaque);
+  background-color: var(--primary-color);
+  color: var(--highlight-text-color);
   border: none;
   border-radius: 0 5px 5px 0;
   padding: 10px 20px;
@@ -74,7 +68,6 @@ h3 {
   font-size: 20px;
 }
 
-/* Estilos para os elementos de dados de clima */
 #weather-data {
   margin-top: 20px;
 }
@@ -82,7 +75,7 @@ h3 {
 #city {
   font-size: 24px;
   font-weight: 500;
-  color: var(--cor-texto);
+  color: var(--text-color);
 }
 
 #city-container {
@@ -92,18 +85,18 @@ h3 {
 }
 
 #city-container i {
-  margin-right: 5px; /* Adicione espaço à direita do ícone de localização */
+  margin-right: 5px; 
 }
 
 #city img {
-  width: 32px; /* Ajuste o tamanho conforme necessário */
-  height: 32px; /* Ajuste o tamanho conforme necessário */
+  width: 32px; 
+  height: 32px; 
 }
 
 #temperature {
   font-size: 48px;
   font-weight: 500;
-  color: var(--cor-primaria);
+  color: var(--primary-color);
 }
 
 #description-container {
@@ -116,7 +109,7 @@ h3 {
 #description {
   font-size: 20px;
   margin-right: 10px;
-  color: var(--cor-texto);
+  color: var(--text-color);
   text-transform: capitalize;
 }
 
@@ -136,17 +129,16 @@ h3 {
 #wind {
   font-size: 16px;
   margin: 0 20px;
-  color: var(--cor-texto);
+  color: var(--text-color);
 }
 
-/* Estilos para os botões de sugestão */
 #suggestions {
   margin-top: 20px;
 }
 
 #suggestions button {
-  background-color: var(--cor-primaria);
-  color: var(--cor-texto-destaque);
+  background-color: var(--primary-color);
+  color: var(--highlight-text-color);
   border: none;
   border-radius: 5px;
   padding: 10px 20px;
@@ -155,10 +147,9 @@ h3 {
 }
 
 #suggestions button:hover {
-  background-color: var(--cor-secundaria);
+  background-color: var(--secondary-color);
 }
 
-/* Estilos para mensagens de erro e loader */
 .hide {
   display: none;
 }
@@ -167,7 +158,7 @@ h3 {
 #loader {
   font-size: 18px;
   margin-top: 10px;
-  color: var(--cor-primaria);
+  color: var(--primary-color);
 }
 
 #loader i {
@@ -184,7 +175,7 @@ h3 {
 }
 
 #country {
-  width: 32px; /* Ajuste o tamanho conforme necessário */
-  height: 32px; /* Ajuste o tamanho conforme necessário */
-  margin-left: 2px; /* Adicione um espaço à esquerda para separá-lo do texto */
+  width: 32px; 
+  height: 32px; 
+  margin-left: 2px; 
 }

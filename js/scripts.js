@@ -62,14 +62,13 @@ const showWeatherData = async (cityName) => {
   humidityElement.innerText = `${cityData.main.humidity}%`;
   windElement.innerText = `${cityData.wind.speed}mph`;
 
-
-  document.body.style.backgroundImage = `url("${apiUnsplash + cityName}") `
+  document.body.style.backgroundImage = `url("${apiUnsplash + cityName}") `;
   weatherContainer.classList.remove("hide");
 };
 
 const clearCityInput = () => {
   cityInput.value = "";
-}
+};
 
 // Error handling:
 // Function with the objective of removing the "hide" class from the error container, as soon as an error occurs.
@@ -103,10 +102,10 @@ cityInput.addEventListener("keyup", (event) => {
 });
 
 // A menu of city suggestions that, as soon as it is clicked, executes the "showWeatherData" function with the name of the chosen city.
-suggestionButtons.forEach(btn => {
-    btn.addEventListener("click", () => {
-        const cityName = btn.getAttribute("id");
-    
-        showWeatherData(cityName);
-    })
-})
+suggestionButtons.forEach((btn) => {
+  btn.addEventListener("click", () => {
+    const cityName = btn.getAttribute("id");
+
+    showWeatherData(cityName);
+  });
+});
