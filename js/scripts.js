@@ -1,7 +1,7 @@
-require("dotenv").config();
+// require("dotenv").config();
 
 // Variables and element selection:
-const apiKey = process.env.API_KEY;
+const apiKey = "f382cadccef19526187fd2efd55fdffe";
 const apiUnsplash = "https://source.unsplash.com/1600x900/?";
 
 const cityInput = document.querySelector("#city-input");
@@ -28,42 +28,63 @@ const toggleLoader = () => {
 
 // Function with the objective of obtaining the meteorological data of the specified city.
 const getWeatherData = async (cityName) => {
-  clearCityInput();
-  toggleLoader();
-  const apiWeatherURL = `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&units=imperial&appid=${apiKey}&lang=en`;
-  const apiResponse = await fetch(apiWeatherURL);
-  const apiData = await apiResponse.json();
+  try {
+    clearCityInput();
+    toggleLoader();
+    const apiWeatherURL = `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&units=imperial&appid=${apiKey}&lang=en`;
+    const apiResponse = await Promise.race([fetch(`${apiWeatherURL}`), new Promise((_, reject) => setTimeout(() => reject(new Error('Connection attempts timed out!')), 3000))]);
+    const apiData = await apiResponse.json();
 
-  toggleLoader();
-  return apiData;
+
+    toggleLoader();
+    return apiData;
+  } catch (error) {
+    console.error(`An error has occurred: ${error.message}`);
+  }
 };
 
 // Receives the weather data of the specified city and displays city information.
 const showWeatherData = async (cityName) => {
-  hideInformation();
-  const cityData = await getWeatherData(cityName);
+  try {
+    if (!cityName.trim()) {
+      throw new Error(`You must enter a city!`);
+      return;
+    }
 
-  if (cityData.cod === "404") {
-    showErrorMessage();
-    return;
+      const cityPattern = /^[a-zA-Z\s]+$/
+
+      if (!cityPattern.test(cityName)) {
+        throw new Error(`Invalid characters in city name!`);
+      }
+
+    hideInformation();
+    const cityData = await getWeatherData(cityName);
+    
+    if (cityData.cod === "404") {
+      showErrorMessage();
+      throw new Error(`Could not find a city with this name!`)
+      return;
+    }
+
+    cityElement.textContent = cityData.name;
+    temperatureElement.textContent = parseInt(cityData.main.temp);
+    descriptionElement.textContent = cityData.weather[0].description;
+    weatherIconElement.setAttribute(
+      "src",
+      `https://openweathermap.org/img/wn/${cityData.weather[0].icon}.png`
+    );
+    countryElement.setAttribute(
+      "src",
+      `https://flagsapi.com/${cityData.sys.country}/flat/64.png`
+    );
+    humidityElement.innerText = `${cityData.main.humidity}%`;
+    windElement.innerText = `${cityData.wind.speed}mph`;
+
+    document.body.style.backgroundImage = `url("${apiUnsplash + cityName}") `;
+    weatherContainer.classList.remove("hide");
+  } catch (error) {
+    console.error(`An error has occurred: ${error.message}`);
   }
-
-  cityElement.textContent = cityData.name;
-  temperatureElement.textContent = parseInt(cityData.main.temp);
-  descriptionElement.textContent = cityData.weather[0].description;
-  weatherIconElement.setAttribute(
-    "src",
-    `https://openweathermap.org/img/wn/${cityData.weather[0].icon}.png`
-  );
-  countryElement.setAttribute(
-    "src",
-    `https://flagsapi.com/${cityData.sys.country}/flat/64.png`
-  );
-  humidityElement.innerText = `${cityData.main.humidity}%`;
-  windElement.innerText = `${cityData.wind.speed}mph`;
-
-  document.body.style.backgroundImage = `url("${apiUnsplash + cityName}") `;
-  weatherContainer.classList.remove("hide");
 };
 
 const clearCityInput = () => {
@@ -83,6 +104,19 @@ const hideInformation = () => {
 
   suggestionContainer.classList.add("hide");
 };
+
+const checkError = (errorCode) => {
+  const errorOptions = {
+    404: "400: Bad Request",
+    401: "401: Unauthorized",
+    403: "403: Forbidden",
+    404: "404: Not Found",
+    500: "505: Internal Server Error",
+    502: "502: Bad Gateway"
+  } 
+
+  return errorOptions[errorCode];
+}
 
 // Events
 // Adding "click" event on the search button to run the "showWeatherData" function whenever the button is clicked!
